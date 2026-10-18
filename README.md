@@ -109,6 +109,13 @@ flowchart TD
 
 ---
 
+ <p align="center">
+  <a href="https://github.com/igormikt/requests">
+    <img src="docs/cover.jpg" width="1200" alt="requests"/>
+  </a>
+</p>
+
+
 ## Память диалога
 
 Память нужна, чтобы система понимала уточняющие вопросы («а сколько это дней?») и не теряла контекст в длинных диалогах. Работает в три слоя:
@@ -211,6 +218,12 @@ curl.exe "http://127.0.0.1:8000/audit/export/documents?format=json" --output doc
 Ошибки: `404` — неизвестный dataset или нет данных, `400` — неверный формат. Сам экспорт тоже фиксируется в `audit_runs` (действие `export`).
 
 ---
+
+<p align="center">
+  <a href="https://github.com/igormikt/table">
+    <img src="docs/cover.jpg" width="1200" alt="table"/>
+  </a>
+</p>
 
 ## Демонстрация (видео)
 
