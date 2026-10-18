@@ -1,0 +1,19 @@
+# Секреты — только через --env-file / compose env_file
+.env
+
+# Зависимости
+.venv
+__pycache__
+*.py[cod]
+
+# Системное / IDE
+.git
+.gitignore
+.vscode
+
+# Документация и утилиты (в образ не нужны)
+docs
+*.md
+License
+bootstrap.ps1
+bootstrap1.ps1

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Экран 1: Витрина документов</h2>
+<article>
+  <h3>Загрузить документ</h3>
+  <form action="/documents/upload" method="post" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Название (необязательно)">
+    <input type="text" name="topic" placeholder="Тема (например, Отпуска)">
+    <input type="file" name="file" accept=".txt,.md" required>
+    <button type="submit">Загрузить</button>
+  </form>
+</article>
+<article>
+  <h3>Документы в базе ({{ documents|length }})</h3>
+  <table>
+    <thead><tr><th>ID</th><th>Название</th><th>Тема</th><th>Фрагментов</th><th>Дата</th><th></th></tr></thead>
+    <tbody>
+      {% for d in documents %}
+      <tr>
+        <td>{{ d.id }}</td><td>{{ d.title }}</td><td>{{ d.topic or '—' }}</td>
+        <td>{{ d.chunks_count }}</td>
+        <td>{{ d.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+        <td>
+          <button type="button" class="secondary outline edit-btn"
+                  data-id="{{ d.id }}"
+                  data-title="{{ d.title }}"
+                  data-topic="{{ d.topic or '' }}">Редактировать</button>
+          <form action="/documents/{{ d.id }}" method="post" style="display:inline">
+            <button type="submit" class="secondary outline">Удалить</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6">Документов пока нет</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</article>
+
+<script>
+document.querySelectorAll('.edit-btn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('data-id');
+    var title = btn.getAttribute('data-title');
+    var topic = btn.getAttribute('data-topic');
+
+    var newTitle = prompt('Новое название:', title);
+    if (newTitle === null) return;
+    var newTopic = prompt('Новая тема:', topic);
+    if (newTopic === null) return;
+
+    fetch('/documents/' + id, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'title=' + encodeURIComponent(newTitle) + '&topic=' + encodeURIComponent(newTopic)
+    })
+    .then(function () { location.reload(); })
+    .catch(function (err) { alert('Ошибка: ' + err); });
+  });
+});
+</script>
+
+{% endblock %}

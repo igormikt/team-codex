@@ -1,0 +1,55 @@
+{"question": "Сколько дней ежегодный основной отпуск?", "expected_status": "answered_auto", "expected_quote": "28 календарных дней"}
+{"question": "Какие дополнительные отпуска положены?", "expected_status": "answered_auto", "expected_quote": "до 7 дней"}
+{"question": "Когда утверждается график отпусков?", "expected_status": "answered_auto", "expected_quote": "до 17 декабря"}
+{"question": "За сколько дней подавать заявление на отпуск?", "expected_status": "answered_auto", "expected_quote": "за 14 дней"}
+{"question": "Когда выплачиваются отпускные?", "expected_status": "answered_auto", "expected_quote": "за 3 дня до начала отпуска"}
+{"question": "Можно ли разделить отпуск на части?", "expected_status": "answered_auto", "expected_quote": "не менее 14 календарных дней"}
+{"question": "Как уведомить о переносе отпуска?", "expected_status": "answered_auto", "expected_quote": "не позднее чем за 14 дней"}
+{"question": "Что делать при больничном листе?", "expected_status": "answered_auto", "expected_quote": "5 рабочих дней"}
+{"question": "Кто оплачивает больничный лист?", "expected_status": "answered_auto", "expected_quote": "за счёт работодателя"}
+{"question": "Какой процент пособия по больничному зависит от стажа?", "expected_status": "answered_auto", "expected_quote": "60%"}
+{"question": "Когда выплачивается зарплата?", "expected_status": "answered_auto", "expected_quote": "2 раза в месяц"}
+{"question": "Где посмотреть расчётный листок по зарплате?", "expected_status": "answered_auto", "expected_quote": "Мои выплаты"}
+{"question": "Кто начисляет зарплату и где бухгалтерия?", "expected_status": "answered_auto", "expected_quote": "каб. 210"}
+{"question": "Какой формат корпоративной почты?", "expected_status": "answered_auto", "expected_quote": "фамилия.имя@promtekno.ru"}
+{"question": "Какие экстренные номера телефонов?", "expected_status": "answered_auto", "expected_quote": "пожарная — 101"}
+{"question": "Как проходит адаптация нового сотрудника?", "expected_status": "answered_auto", "expected_quote": "3 месяца"}
+{"question": "Кто может быть наставником и сколько длится наставничество?", "expected_status": "answered_auto", "expected_quote": "не менее 3 лет"}
+{"question": "Как отправить предложение по улучшению процессов?", "expected_status": "answered_auto", "expected_quote": "10 рабочих дней"}
+{"question": "Какие склады есть на предприятии?", "expected_status": "answered_auto", "expected_quote": "сырьё и основные материалы"}
+{"question": "Что такое лимитно-заборная карта?", "expected_status": "answered_auto", "expected_quote": "ЛЗК"}
+{"question": "Что такое требование-накладная М-11?", "expected_status": "answered_auto", "expected_quote": "хозяйственных нужд"}
+{"question": "В какой срок принимаются материалы на склад?", "expected_status": "answered_auto", "expected_quote": "24 часов"}
+{"question": "Как оформляются расхождения при приёмке?", "expected_status": "answered_auto", "expected_quote": "ТОРГ-2"}
+{"question": "Какой принцип хранения материалов FIFO?", "expected_status": "answered_auto", "expected_quote": "First In — First Out"}
+{"question": "Какие условия хранения электроники?", "expected_status": "answered_auto", "expected_quote": "+15…+25°C"}
+{"question": "Когда проводится инвентаризация?", "expected_status": "answered_auto", "expected_quote": "1 раз в год (декабрь)"}
+{"question": "В какое время выдаются материалы в цех?", "expected_status": "answered_auto", "expected_quote": "08:00–12:00"}
+{"question": "Какие документы нужны для получения материалов?", "expected_status": "answered_auto", "expected_quote": "постоянный пропуск"}
+{"question": "Как оформляется выдача сверх лимита?", "expected_status": "answered_auto", "expected_quote": "50 000 руб"}
+{"question": "В какой срок возвращаются неиспользованные материалы?", "expected_status": "answered_auto", "expected_quote": "24 часов"}
+{"question": "Как перевозить грузы по территории предприятия?", "expected_status": "answered_auto", "expected_quote": "свыше 50 кг"}
+{"question": "Кто несёт материальную ответственность на складе?", "expected_status": "answered_auto", "expected_quote": "полную материальную ответственность"}
+{"question": "Какие отчёты формирует склад?", "expected_status": "answered_auto", "expected_quote": "более 180 дней"}
+{"question": "Какие категории ремонтной сложности оборудования?", "expected_status": "answered_auto", "expected_quote": "4 категории"}
+{"question": "Какое время реагирования на отказ оборудования категории А?", "expected_status": "answered_auto", "expected_quote": "не более 15 минут"}
+{"question": "Какая периодичность ТО-1 и ТО-2?", "expected_status": "answered_auto", "expected_quote": "каждые 250 моточасов"}
+{"question": "Когда утверждается график ППР?", "expected_status": "answered_auto", "expected_quote": "до 25 декабря"}
+{"question": "Что входит в ежесменное обслуживание (ЕО)?", "expected_status": "answered_auto", "expected_quote": "6–8 бар"}
+{"question": "Что входит в работы ТО-1?", "expected_status": "answered_auto", "expected_quote": "замена фильтров"}
+{"question": "Что добавляется в ТО-2 по сравнению с ТО-1?", "expected_status": "answered_auto", "expected_quote": "замена масла"}
+{"question": "Как оформляется акт после ТО-1 и ТО-2?", "expected_status": "answered_auto", "expected_quote": "исполнитель и мастер смены"}
+{"question": "Как проводится капитальный ремонт (КР)?", "expected_status": "answered_auto", "expected_quote": "полной разборкой оборудования"}
+{"question": "Что делать при аварийном отказе оборудования?", "expected_status": "answered_auto", "expected_quote": "форма АА-1"}
+{"question": "Какие KPI надёжности оборудования?", "expected_status": "answered_auto", "expected_quote": "MTBF ≥ 500 часов"}
+{"question": "Какие документы нужны для ремонтных работ по охране труда?", "expected_status": "answered_auto", "expected_quote": "форма НД-1"}
+{"question": "Что такое Lockout/Tagout при ремонте?", "expected_status": "answered_auto", "expected_quote": "НЕ ВКЛЮЧАТЬ — РАБОТАЮТ ЛЮДИ"}
+{"question": "Как получить ипотеку?", "expected_status": "no_topic", "expected_quote": null}
+{"question": "Когда повысят зарплату?", "expected_status": "no_topic", "expected_quote": null}
+{"question": "Расскажи всё о компании", "expected_status": "answered_auto", "expected_quote": null}
+{"question": "Какой пароль от корпоративного Wi-Fi?", "expected_status": "no_topic", "expected_quote": null}
+{"question": "Кто утверждает лимитно-заборные карты, если начальник производства в отпуске?", "expected_status": "needs_review", "expected_quote": null}
+{"question": "Кто инициирует внезапную инвентаризацию, если финансовый директор в отпуске?", "expected_status": "needs_review", "expected_quote": null}
+{"question": "Кто утверждает график смен, если мастер в отпуске?", "expected_status": "needs_review", "expected_quote": null}
+{"question": "Кто отвечает за обновление телефонного справочника, если отв. сотрудник уволился?", "expected_status": "needs_review", "expected_quote": null}
+{"question": "Кто отвечает за обновление телефонного справочника, если отв. сотрудник на больничном?", "expected_status": "needs_review", "expected_quote": null}

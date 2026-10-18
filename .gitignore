@@ -1,0 +1,12 @@
+﻿.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.db
+team_codex.db
+.vscode/settings.json
+.idea/
+*.log
+.DS_Store

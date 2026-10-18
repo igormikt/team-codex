@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Экран 2: Спросить ИИ</h2>
+<article>
+  <form id="ask-form">
+    <label>Ваш вопрос:
+      <textarea name="question" rows="3" required placeholder="За сколько дней нужно уведомить о переносе отпуска?"></textarea>
+    </label>
+    <button type="submit">Спросить</button>
+  </form>
+</article>
+<article id="result" style="display:none">
+  <h3>Результат</h3>
+  <div id="result-content"></div>
+</article>
+<script>
+document.getElementById('ask-form').onsubmit = async (e) => {
+  e.preventDefault();
+  const question = e.target.question.value;
+  if (!localStorage.getItem('sid')) localStorage.setItem('sid', crypto.randomUUID());
+  const res = await fetch('/ask/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({question: question, session_id: localStorage.getItem('sid')})
+  });
+  const data = await res.json();
+  const r = data.result;
+  const reviewBadge = r.needs_review ? '<mark style="background:#ffb700;color:black">ТРЕБУЕТ ПРОВЕРКИ: ' + (r.review_reason || '') + '</mark>' : 'ОК';
+  const citationsHtml = r.citations.map(c => '<li>Документ №' + c.document_id + ', фрагмент №' + c.chunk_id + ': <em>"' + c.quote + '"</em></li>').join('');
+  const html = '<p><strong>Статус:</strong> ' + r.status + ' ' + reviewBadge + '</p>' +
+    '<p><strong>Ответ:</strong> ' + r.answer + '</p>' +
+    '<p><strong>Уверенность:</strong> ' + (r.confidence * 100).toFixed(1) + '%</p>' +
+    '<p><strong>Цитаты (' + r.citations.length + '):</strong></p>' +
+    '<ul>' + citationsHtml + '</ul>' +
+    '<details><summary>Сырой JSON</summary><pre>' + JSON.stringify(data, null, 2) + '</pre></details>';
+  document.getElementById('result-content').innerHTML = html;
+  document.getElementById('result').style.display = 'block';
+};
+</script>
+{% endblock %}

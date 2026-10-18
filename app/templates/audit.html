@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Экран 3: Аудит и ручная проверка</h2>
+<article>
+  <h3>Записи, требующие проверки ({{ needs_review|length }})</h3>
+  <table>
+    <thead><tr><th>ID</th><th>Вопрос</th><th>Причина</th><th>Дата</th><th></th></tr></thead>
+    <tbody>
+      {% for r in needs_review %}
+      <tr>
+        <td>{{ r.id }}</td><td>{{ r.question[:80] }}</td>
+        <td><mark>{{ r.review_reason }}</mark></td>
+        <td>{{ r.created_at.strftime('%H:%M:%S') }}</td>
+        <td>
+          <button type="button" class="secondary outline review-action"
+                  data-id="{{ r.id }}" data-action="approve">Принять</button>
+          <button type="button" class="secondary outline review-action"
+                  data-id="{{ r.id }}" data-action="reject">Отклонить</button>
+        </td>
+      </tr>
+      {% else %}<tr><td colspan="5">Все ответы автоматические</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</article>
+<article>
+  <h3>Журнал запусков</h3>
+  <p>
+    Экспорт (CSV / JSON):
+    <a href="/audit/export/runs?format=csv" role="button" class="secondary outline">Журнал</a>
+    <a href="/audit/export/answers?format=csv" role="button" class="secondary outline">Ответы</a>
+    <a href="/audit/export/gaps?format=csv" role="button" class="secondary outline">Пробелы</a>
+    <a href="/audit/export/documents?format=csv" role="button" class="secondary outline">Документы</a>
+    <a href="/audit/export/faq?format=csv" role="button" class="secondary outline">FAQ</a>
+  </p>
+  <p>
+    <small>Для JSON замените <code>format=csv</code> на <code>format=json</code> в адресе ссылки.</small>
+  </p>
+  <table>
+    <thead><tr><th>ID</th><th>Действие</th><th>Статус</th><th>Длительность (мс)</th><th>Дата</th></tr></thead>
+    <tbody>
+      {% for r in runs %}
+      <tr>
+        <td>{{ r.id }}</td><td>{{ r.action }}</td>
+        <td>{{ r.status }}</td><td>{{ r.duration_ms }}</td>
+        <td>{{ r.created_at.strftime('%H:%M:%S') }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</article>
+<article>
+  <h3>Пробелы в знаниях</h3>
+  <ul>
+    {% for g in gaps %}<li>{{ g.question }} <small>({{ g.created_at.strftime('%d.%m') }})</small></li>{% endfor %}
+  </ul>
+</article>
+
+<script>
+async function auditApi(url, body) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) {
+    let detail = res.status;
+    try { detail = (await res.json()).detail || detail; } catch (e) {}
+    alert('Ошибка: ' + detail);
+    return false;
+  }
+  return true;
+}
+
+document.querySelectorAll('.review-action').forEach(function (btn) {
+  btn.addEventListener('click', async function () {
+    const action = btn.dataset.action;
+    const note = prompt(action === 'approve'
+      ? 'Комментарий к принятию (необязательно):'
+      : 'Причина отклонения (необязательно):', '');
+    if (note === null) return;
+    const ok = await auditApi('/audit/answers/' + btn.dataset.id + '/review',
+      { action: action, note: note.trim() || null });
+    if (ok) location.reload();
+  });
+});
+</script>
+{% endblock %}

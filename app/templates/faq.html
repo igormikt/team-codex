@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Экран 4: Админка FAQ</h2>
+<article>
+  <h3>Добавить запись</h3>
+  <form id="faq-form">
+    <input type="text" name="question" placeholder="Вопрос (ключ, обязательно)" required>
+    <input type="text" name="answer" placeholder="Ответ (обязательно)" required>
+    <input type="text" name="topic" placeholder="Тема (например, Кадры)">
+    <input type="text" name="keywords" placeholder="Ключевые слова через запятую">
+    <select name="status">
+      <option value="answered_auto">answered_auto</option>
+      <option value="needs_review">needs_review</option>
+    </select>
+    <button type="submit">Добавить</button>
+  </form>
+</article>
+<article>
+  <h3>Записи FAQ ({{ entries|length }})</h3>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Тема</th><th>Вопрос</th><th>Ответ</th><th>Ключевые слова</th><th>Статус</th><th>Активна</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for e in entries %}
+      <tr>
+        <td>{{ e.id }}</td>
+        <td>{{ e.topic or '—' }}</td>
+        <td>{{ e.question }}</td>
+        <td>{{ e.answer }}</td>
+        <td>{{ e.keywords or '—' }}</td>
+        <td>{% if e.status == 'needs_review' %}<mark>needs_review</mark>{% else %}{{ e.status or 'answered_auto' }}{% endif %}</td>
+        <td>{% if e.is_active %}&#10003;{% else %}&mdash;{% endif %}</td>
+        <td>
+          <button type="button" class="secondary outline faq-edit"
+                  data-id="{{ e.id }}"
+                  data-question="{{ e.question }}"
+                  data-answer="{{ e.answer }}"
+                  data-topic="{{ e.topic or '' }}"
+                  data-keywords="{{ e.keywords or '' }}"
+                  data-status="{{ e.status or 'answered_auto' }}">Редактировать</button>
+          <button type="button" class="secondary outline faq-toggle"
+                  data-id="{{ e.id }}"
+                  data-active="{{ 'true' if e.is_active else 'false' }}">{% if e.is_active %}Отключить{% else %}Включить{% endif %}</button>
+          <button type="button" class="secondary outline faq-delete" data-id="{{ e.id }}">Удалить</button>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="8">Записей пока нет</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <small>«Удалить» выполняет мягкое удаление (is_active = false); запись остаётся в базе и её можно включить обратно.</small>
+</article>
+
+<script>
+async function faqApi(url, method, body) {
+  const res = await fetch(url, {
+    method: method,
+    headers: { 'Content-Type': 'application/json' },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if (!res.ok) {
+    let detail = res.status;
+    try { detail = (await res.json()).detail || detail; } catch (e) {}
+    alert('Ошибка: ' + detail);
+    return false;
+  }
+  return true;
+}
+
+document.getElementById('faq-form').onsubmit = async function (e) {
+  e.preventDefault();
+  const f = e.target;
+  const ok = await faqApi('/faq/', 'POST', {
+    question: f.question.value.trim(),
+    answer: f.answer.value.trim(),
+    topic: f.topic.value.trim() || null,
+    keywords: f.keywords.value.trim() || null,
+    status: f.status.value
+  });
+  if (ok) location.reload();
+};
+
+document.querySelectorAll('.faq-edit').forEach(function (btn) {
+  btn.addEventListener('click', async function () {
+    const question = prompt('Вопрос:', btn.dataset.question);
+    if (question === null) return;
+    const answer = prompt('Ответ:', btn.dataset.answer);
+    if (answer === null) return;
+    const topic = prompt('Тема:', btn.dataset.topic);
+    if (topic === null) return;
+    const keywords = prompt('Ключевые слова через запятую:', btn.dataset.keywords);
+    if (keywords === null) return;
+    const status = prompt('Статус (answered_auto / needs_review):', btn.dataset.status || 'answered_auto');
+    if (status === null) return;
+    const ok = await faqApi('/faq/' + btn.dataset.id, 'PUT', {
+      question: question,
+      answer: answer,
+      topic: topic || null,
+      keywords: keywords || null,
+      status: status || 'answered_auto'
+    });
+    if (ok) location.reload();
+  });
+});
+
+document.querySelectorAll('.faq-toggle').forEach(function (btn) {
+  btn.addEventListener('click', async function () {
+    const isActive = btn.dataset.active === 'true';
+    const ok = await faqApi('/faq/' + btn.dataset.id, 'PUT', { is_active: !isActive });
+    if (ok) location.reload();
+  });
+});
+
+document.querySelectorAll('.faq-delete').forEach(function (btn) {
+  btn.addEventListener('click', async function () {
+    if (!confirm('Отключить запись (мягкое удаление, is_active = false)?')) return;
+    const ok = await faqApi('/faq/' + btn.dataset.id, 'DELETE');
+    if (ok) location.reload();
+  });
+});
+</script>
+{% endblock %}

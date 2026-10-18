@@ -1,0 +1,5 @@
+# Дев-зависимости: не входят в Docker-образ (в Dockerfile ставится только requirements.txt).
+# Нужны только при локальной разработке: pytest — тесты, httpie — ручная отладка API.
+-r requirements.txt
+pytest==9.0.3
+httpie==3.2.4
