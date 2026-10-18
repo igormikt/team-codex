@@ -110,8 +110,8 @@ flowchart TD
 ---
 
  <p align="center">
-  <a href="https://github.com/igormikt/requests">
-    <img src="docs/cover.jpg" width="1200" alt="requests"/>
+  <a href="https://github.com/igormikt/team-codex">
+    <img src="docs/requests.jpg" width="1200" alt="team-codex"/>
   </a>
 </p>
 
@@ -220,8 +220,8 @@ curl.exe "http://127.0.0.1:8000/audit/export/documents?format=json" --output doc
 ---
 
 <p align="center">
-  <a href="https://github.com/igormikt/table">
-    <img src="docs/cover.jpg" width="1200" alt="table"/>
+  <a href="https://github.com/igormikt/team-codex">
+    <img src="docs/table.jpg" width="1200" alt="team-codex"/>
   </a>
 </p>
 
