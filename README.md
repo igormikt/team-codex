@@ -574,5 +574,7 @@ Get-Content tests_data\kb_documents.jsonl -Encoding UTF8 | ForEach-Object {
 ## Лицензия
 MIT
 
-Author: IGOR_M   Project:Team Codex<br> Repository: team-codex
+Author: IGOR_M<br>
+Project:Team Codex<br> 
+Repository: team-codex
 
