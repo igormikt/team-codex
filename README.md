@@ -1,6 +1,6 @@
  <p align="center">
   <a href="https://github.com/igormikt/team-codex">
-    <img src="assets/images/cover.png" width="1200" alt="team-codex"/>
+    <img src="docs/images/cover.png" width="1200" alt="team-codex"/>
   </a>
 </p>
 
